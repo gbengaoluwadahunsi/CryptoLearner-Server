@@ -89,7 +89,7 @@ export const forgotPassword = async(req, res) => {
       from: process.env.EMAIL_USER,
       to: email,
       subject: 'Reset Password',
-      text: `http://localhost:5174/reset-password/${token}`,
+      text: `https://crypto-learner.vercel.app/reset-password/${token}`,
     };
     
     transporter.sendMail(mailOptions, function(error, info){
