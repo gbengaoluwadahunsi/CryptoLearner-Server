@@ -5,6 +5,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 
 import postRoutes from "./routes/posts.js";
+import authRoutes from "./routes/authRoutes.js";
+import admin from "./routes/adminRoute.js";
 
 const app = express();
 dotenv.config();
@@ -18,15 +20,15 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
 // Define routes after middleware
 app.use("/todos", postRoutes);
+app.use("/auth", authRoutes);
+app.use("/admin", admin);
 
 //conect to mongoDb databasee
 const PORT = process.env.PORT || 5000;
 
- mongoose.connect(process.env.CONNECTION_URL)
+mongoose
+  .connect(process.env.CONNECTION_URL)
   .then(() =>
     app.listen(PORT, () => console.log(`Server running on PORT ${PORT}`))
   )
   .catch((error) => console.log(error.message));
-
-
- 
